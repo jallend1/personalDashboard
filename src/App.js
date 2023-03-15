@@ -1,9 +1,9 @@
+import Stopwatch from "./Components/Stopwatch";
+
 function App() {
   return (
     <div className="App">
-      <header>
-        <h1>Hello there.</h1>
-      </header>
+      <Stopwatch />
     </div>
   );
 }
