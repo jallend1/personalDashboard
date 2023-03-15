@@ -32,12 +32,19 @@ const Stopwatch = () => {
     return () => clearInterval(interval);
   }, [isRunning, isPaused]);
 
+  const toggleStartButton = () => {
+    if (isRunning && !isPaused) {
+      return <button onClick={pauseStopwatch}>Pause</button>;
+    } else {
+      return <button onClick={startStopwatch}>Start</button>;
+    }
+  };
+
   return (
     <div className="stopwatch">
       <div className="time">{time}</div>
       <div className="buttons">
-        <button onClick={startStopwatch}>Start</button>
-        <button onClick={pauseStopwatch}>Pause</button>
+        {toggleStartButton()}
         <button onClick={resetStopwatch}>Reset</button>
       </div>
     </div>
