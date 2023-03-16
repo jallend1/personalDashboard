@@ -52,6 +52,8 @@ const Stopwatch = () => {
     }
   };
 
+  const precedingZero = (time) => (time < 10 ? "0" + time : time);
+
   useEffect(() => {
     let interval = null;
     if (isRunning && !isPaused) {
@@ -77,17 +79,9 @@ const Stopwatch = () => {
   return (
     <div className="stopwatch">
       <div className="time">
-        {stopWatchTime.hours < 10
-          ? "0" + stopWatchTime.hours
-          : stopWatchTime.hours}
-        :
-        {stopWatchTime.minutes < 10
-          ? "0" + stopWatchTime.minutes
-          : stopWatchTime.minutes}
-        :
-        {stopWatchTime.seconds < 10
-          ? "0" + stopWatchTime.seconds
-          : stopWatchTime.seconds}
+        {precedingZero(stopWatchTime.hours)}:
+        {precedingZero(stopWatchTime.minutes)}:
+        {precedingZero(stopWatchTime.seconds)}
       </div>
       <div className="buttons">
         {toggleStartButton()}
