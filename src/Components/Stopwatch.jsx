@@ -22,7 +22,7 @@ const Stopwatch = () => {
     ];
     let currentColor = startColor;
     let i = 0;
-    const interval = setInterval(() => {
+    const colorInterval = setInterval(() => {
       currentColor = [
         currentColor[0] + stepColor[0],
         currentColor[1] + stepColor[1],
@@ -31,7 +31,7 @@ const Stopwatch = () => {
       document.body.style.backgroundColor = `rgba(${currentColor[0]}, ${currentColor[1]}, ${currentColor[2]}, 0.4)`;
       i++;
       if (i === steps) {
-        clearInterval(interval);
+        clearInterval(colorInterval);
       }
     }, stepTime * 1000);
   };
@@ -85,6 +85,7 @@ const Stopwatch = () => {
     changeBackgroundColor();
     let interval = null;
     if (isRunning && !isPaused) {
+      //   TODO: Integrate color interval with stopwatch interval
       interval = setInterval(() => {
         setStopWatchTime((prevStopWatchTime) => {
           return handleTimeLogic(prevStopWatchTime);
