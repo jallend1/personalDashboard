@@ -5,8 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("./images/insignia.jpg");
+  background-image: url("./images/insignia.jpg");
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

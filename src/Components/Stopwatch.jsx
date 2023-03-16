@@ -9,6 +9,33 @@ const Stopwatch = () => {
     seconds: 0,
   });
 
+  const changeBackgroundColor = () => {
+    const startColor = [0, 0, 0];
+    const finishColor = [255, 11, 11];
+    const time = 10;
+    const steps = 30;
+    const stepTime = time / steps;
+    const stepColor = [
+      (finishColor[0] - startColor[0]) / steps,
+      (finishColor[1] - startColor[1]) / steps,
+      (finishColor[2] - startColor[2]) / steps,
+    ];
+    let currentColor = startColor;
+    let i = 0;
+    const interval = setInterval(() => {
+      currentColor = [
+        currentColor[0] + stepColor[0],
+        currentColor[1] + stepColor[1],
+        currentColor[2] + stepColor[2],
+      ];
+      document.body.style.backgroundColor = `rgba(${currentColor[0]}, ${currentColor[1]}, ${currentColor[2]}, 0.4)`;
+      i++;
+      if (i === steps) {
+        clearInterval(interval);
+      }
+    }, stepTime * 1000);
+  };
+
   const startStopwatch = () => {
     setIsRunning(true);
     setIsPaused(false);
@@ -55,6 +82,7 @@ const Stopwatch = () => {
   const precedingZero = (time) => (time < 10 ? "0" + time : time);
 
   useEffect(() => {
+    changeBackgroundColor();
     let interval = null;
     if (isRunning && !isPaused) {
       interval = setInterval(() => {
