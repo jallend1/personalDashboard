@@ -82,10 +82,14 @@ const Stopwatch = () => {
   const precedingZero = (time) => (time < 10 ? "0" + time : time);
 
   useEffect(() => {
-    changeBackgroundColor();
     let interval = null;
+    let colorInterval = null;
     if (isRunning && !isPaused) {
       //   TODO: Integrate color interval with stopwatch interval
+      changeBackgroundColor();
+      colorInterval = setInterval(() => {
+        changeBackgroundColor();
+      }, 10000);
       interval = setInterval(() => {
         setStopWatchTime((prevStopWatchTime) => {
           return handleTimeLogic(prevStopWatchTime);
@@ -93,6 +97,7 @@ const Stopwatch = () => {
       }, 1000);
     } else if (!isRunning && !isPaused) {
       clearInterval(interval);
+      clearInterval(colorInterval);
     }
     return () => clearInterval(interval);
   }, [isRunning, isPaused]);
