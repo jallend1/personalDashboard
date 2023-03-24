@@ -1,31 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 const Stopwatch = () => {
   const START_COLOR = [0, 0, 0];
   const FINISH_COLOR = [255, 11, 11];
-  const TIME_TO_COMPLETE = 10;
+  const TIME_TO_COMPLETE = 1800;
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
-    seconds: 0,
+    seconds: 0
   });
-  const [currentBackgroundColor, setCurrentBackgroundColor] = useState(START_COLOR);
-  const [remainingTimeToComplete, setRemainingTimeToComplete] = useState(TIME_TO_COMPLETE);
+  const [currentBackgroundColor, setCurrentBackgroundColor] =
+    useState(START_COLOR);
+  const [remainingTimeToComplete, setRemainingTimeToComplete] =
+    useState(TIME_TO_COMPLETE);
 
   const changeBackgroundColor = () => {
-    if(remainingTimeToComplete > 0) {
+    if (remainingTimeToComplete > 0) {
       // Calculate the amount each color needs to change by to smoothly reach the final color in the remaining time
-      const colorSteps = FINISH_COLOR.map((color, index) => (color - currentBackgroundColor[index]) / remainingTimeToComplete);
+      const colorSteps = FINISH_COLOR.map(
+        (color, index) =>
+          (color - currentBackgroundColor[index]) / remainingTimeToComplete
+      );
       // Changes the current color by the calculated amount
-      const newColors = currentBackgroundColor.map((color, index) => color + colorSteps[index]);
+      const newColors = currentBackgroundColor.map(
+        (color, index) => color + colorSteps[index]
+      );
       setRemainingTimeToComplete((prevTime) => prevTime - 1);
       setCurrentBackgroundColor(newColors);
       document.body.style.backgroundColor = `rgb(${newColors[0]}, ${newColors[1]}, ${newColors[2]}, 0.4)`;
     }
   };
-
 
   const startStopwatch = () => {
     setIsRunning(true);
@@ -42,11 +48,11 @@ const Stopwatch = () => {
     setStopWatchTime({
       hours: 0,
       minutes: 0,
-      seconds: 0,
+      seconds: 0
     });
     resetBackgroundColor();
   };
-  
+
   const resetBackgroundColor = () => {
     setCurrentBackgroundColor(START_COLOR);
     document.body.style.backgroundColor = `rgb(${START_COLOR[0]}, ${START_COLOR[1]}, ${START_COLOR[2]}, 0.4)`;
@@ -55,29 +61,26 @@ const Stopwatch = () => {
 
   const handleTimeLogic = (prevStopWatchTime) => {
     if (prevStopWatchTime.seconds === 59) {
-      if (prevStopWatchTime.minutes === 59) {
-        return {
-          hours: prevStopWatchTime.hours + 1,
-          minutes: 0,
-          seconds: 0,
-        };
-      } else {
-        return {
-          hours: prevStopWatchTime.hours,
-          minutes: prevStopWatchTime.minutes + 1,
-          seconds: 0,
-        };
-      }
+      return prevStopWatchTime.minutes === 59
+        ? // If ??:59:59, add an hour
+          { hours: prevStopWatchTime.hours + 1, minutes: 0, seconds: 0 }
+        : // If ??:??:59, add a minute
+          {
+            hours: prevStopWatchTime.hours,
+            minutes: prevStopWatchTime.minutes + 1,
+            seconds: 0
+          };
     } else {
+      // Otherwise, add a second
       return {
         hours: prevStopWatchTime.hours,
         minutes: prevStopWatchTime.minutes,
-        seconds: prevStopWatchTime.seconds + 1,
+        seconds: prevStopWatchTime.seconds + 1
       };
     }
   };
 
-  const precedingZero = (time) => (time < 10 ? "0" + time : time);
+  const precedingZero = (time) => (time < 10 ? '0' + time : time);
 
   useEffect(() => {
     let interval = null;
@@ -96,7 +99,10 @@ const Stopwatch = () => {
       clearInterval(interval);
       clearInterval(colorInterval);
     }
-    return () => {clearInterval(interval); clearInterval(colorInterval)};
+    return () => {
+      clearInterval(interval);
+      clearInterval(colorInterval);
+    };
   }, [isRunning, isPaused, remainingTimeToComplete, currentBackgroundColor]);
 
   const toggleStartButton = () => {
