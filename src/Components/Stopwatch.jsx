@@ -114,6 +114,7 @@ const Stopwatch = () => {
 
   return (
     <div className="stopwatch">
+      <h2>Time since you last stood up:</h2>
       <div className="time">
         {precedingZero(stopWatchTime.hours)}:
         {precedingZero(stopWatchTime.minutes)}:

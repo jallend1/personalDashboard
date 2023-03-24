@@ -40,6 +40,15 @@ code {
   text-align: center;
 }
 
+.stopwatch {
+  border: solid 1px #fff;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: rgba(255, 255, 255, 0.589);
+  color: rgb(0, 0, 0);
+}
+
 .time {
   font-size: 3rem;
   text-align: center;
