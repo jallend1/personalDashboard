@@ -15,16 +15,11 @@ const Stopwatch = () => {
   const [remainingTimeToComplete, setRemainingTimeToComplete] = useState(TIME_TO_COMPLETE);
 
   const changeBackgroundColor = () => {
-    console.log("We're in!");
-    console.log(remainingTimeToComplete );
     if(remainingTimeToComplete > 0) {
-      const rDiff = FINISH_COLOR[0] - currentBackgroundColor[0];
-      const gDiff = FINISH_COLOR[1] - currentBackgroundColor[1];
-      const bDiff = FINISH_COLOR[2] - currentBackgroundColor[2];
-      const rIncrement = rDiff / remainingTimeToComplete;
-      const gIncrement = gDiff / remainingTimeToComplete;
-      const bIncrement = bDiff / remainingTimeToComplete;
-      const newColors = [currentBackgroundColor[0] + rIncrement, currentBackgroundColor[1] + gIncrement, currentBackgroundColor[2] + bIncrement];
+      // Calculate the amount each color needs to change by to smoothly reach the final color in the remaining time
+      const colorSteps = FINISH_COLOR.map((color, index) => (color - currentBackgroundColor[index]) / remainingTimeToComplete);
+      // Changes the current color by the calculated amount
+      const newColors = currentBackgroundColor.map((color, index) => color + colorSteps[index]);
       setRemainingTimeToComplete((prevTime) => prevTime - 1);
       setCurrentBackgroundColor(newColors);
       document.body.style.backgroundColor = `rgb(${newColors[0]}, ${newColors[1]}, ${newColors[2]}, 0.4)`;
