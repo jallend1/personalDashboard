@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Stopwatch = () => {
   const START_COLOR = [0, 0, 0];
-  const FINISH_COLOR = [255, 11, 11];
-  const TIME_TO_COMPLETE = 1800;
+  const TIME_TO_COMPLETE = 3600;
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [stopWatchTime, setStopWatchTime] = useState({
@@ -15,23 +14,6 @@ const Stopwatch = () => {
     useState(START_COLOR);
   const [remainingTimeToComplete, setRemainingTimeToComplete] =
     useState(TIME_TO_COMPLETE);
-
-  const changeBackgroundColor = () => {
-    if (remainingTimeToComplete > 0) {
-      // Calculate the amount each color needs to change by to smoothly reach the final color in the remaining time
-      const colorSteps = FINISH_COLOR.map(
-        (color, index) =>
-          (color - currentBackgroundColor[index]) / remainingTimeToComplete
-      );
-      // Changes the current color by the calculated amount
-      const newColors = currentBackgroundColor.map(
-        (color, index) => color + colorSteps[index]
-      );
-      setRemainingTimeToComplete((prevTime) => prevTime - 1);
-      setCurrentBackgroundColor(newColors);
-      document.body.style.backgroundColor = `rgb(${newColors[0]}, ${newColors[1]}, ${newColors[2]}, 0.4)`;
-    }
-  };
 
   const startStopwatch = () => {
     setIsRunning(true);
@@ -83,10 +65,27 @@ const Stopwatch = () => {
   const precedingZero = (time) => (time < 10 ? '0' + time : time);
 
   useEffect(() => {
+    const FINISH_COLOR = [255, 11, 11];
+    const changeBackgroundColor = () => {
+      if (remainingTimeToComplete > 0) {
+        // Calculate the amount each color needs to change by to smoothly reach the final color in the remaining time
+        const colorSteps = FINISH_COLOR.map(
+          (color, index) =>
+            (color - currentBackgroundColor[index]) / remainingTimeToComplete
+        );
+        // Changes the current color by the calculated amount
+        const newColors = currentBackgroundColor.map(
+          (color, index) => color + colorSteps[index]
+        );
+        setRemainingTimeToComplete((prevTime) => prevTime - 1);
+        setCurrentBackgroundColor(newColors);
+        document.body.style.backgroundColor = `rgb(${newColors[0]}, ${newColors[1]}, ${newColors[2]}, 0.4)`;
+      }
+    };
+
     let interval = null;
     let colorInterval = null;
     if (isRunning && !isPaused) {
-      //   TODO: Integrate color interval with stopwatch interval
       colorInterval = setInterval(() => {
         changeBackgroundColor();
       }, 1000);
