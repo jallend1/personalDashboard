@@ -15,6 +15,8 @@ const Stopwatch = () => {
   const [remainingTimeToComplete, setRemainingTimeToComplete] = useState(TIME_TO_COMPLETE);
 
   const changeBackgroundColor = () => {
+    console.log("We're in!");
+    console.log(remainingTimeToComplete );
     if(remainingTimeToComplete > 0) {
       const rDiff = FINISH_COLOR[0] - currentBackgroundColor[0];
       const gDiff = FINISH_COLOR[1] - currentBackgroundColor[1];
@@ -53,6 +55,7 @@ const Stopwatch = () => {
   const resetBackgroundColor = () => {
     setCurrentBackgroundColor(START_COLOR);
     document.body.style.backgroundColor = `rgb(${START_COLOR[0]}, ${START_COLOR[1]}, ${START_COLOR[2]}, 0.4)`;
+    setRemainingTimeToComplete(TIME_TO_COMPLETE);
   };
 
   const handleTimeLogic = (prevStopWatchTime) => {
@@ -99,7 +102,7 @@ const Stopwatch = () => {
       clearInterval(colorInterval);
     }
     return () => {clearInterval(interval); clearInterval(colorInterval)};
-  }, [isRunning, isPaused, remainingTimeToComplete]);
+  }, [isRunning, isPaused, remainingTimeToComplete, currentBackgroundColor]);
 
   const toggleStartButton = () => {
     if (isRunning && !isPaused) {
