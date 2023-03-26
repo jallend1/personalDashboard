@@ -1,6 +1,7 @@
 import Stopwatch from "./Components/Stopwatch";
 import Greeting from "./Components/Greeting";
 import Toggle from "./Components/Toggle";
+import ActiveHours from "./Components/ActiveHours";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Greeting />
       <Stopwatch />
       <Toggle />
+      <ActiveHours />
     </div>
   );
 }
