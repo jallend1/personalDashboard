@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const Stopwatch = () => {
   const START_COLOR = [0, 0, 0];
@@ -8,7 +8,7 @@ const Stopwatch = () => {
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
   const [currentBackgroundColor, setCurrentBackgroundColor] =
     useState(START_COLOR);
@@ -30,14 +30,15 @@ const Stopwatch = () => {
     setStopWatchTime({
       hours: 0,
       minutes: 0,
-      seconds: 0
+      seconds: 0,
     });
     resetBackgroundColor();
   };
 
   const resetBackgroundColor = () => {
+    const stopwatchDiv = document.querySelector("#stopwatch");
     setCurrentBackgroundColor(START_COLOR);
-    document.body.style.backgroundColor = `rgb(${START_COLOR[0]}, ${START_COLOR[1]}, ${START_COLOR[2]}, 0.4)`;
+    stopwatchDiv.style.backgroundColor = `rgb(${START_COLOR[0]}, ${START_COLOR[1]}, ${START_COLOR[2]}, 0.4)`;
     setRemainingTimeToComplete(TIME_TO_COMPLETE);
   };
 
@@ -50,23 +51,25 @@ const Stopwatch = () => {
           {
             hours: prevStopWatchTime.hours,
             minutes: prevStopWatchTime.minutes + 1,
-            seconds: 0
+            seconds: 0,
           };
     } else {
       // Otherwise, add a second
       return {
         hours: prevStopWatchTime.hours,
         minutes: prevStopWatchTime.minutes,
-        seconds: prevStopWatchTime.seconds + 1
+        seconds: prevStopWatchTime.seconds + 1,
       };
     }
   };
 
-  const precedingZero = (time) => (time < 10 ? '0' + time : time);
+  const precedingZero = (time) => (time < 10 ? "0" + time : time);
 
   useEffect(() => {
+    const stopwatchDiv = document.querySelector("#stopwatch");
+    console.log(stopwatchDiv);
     const FINISH_COLOR = [255, 11, 11];
-    const changeBackgroundColor = () => {
+    const changeBackgroundColor = (stopwatchDiv) => {
       if (remainingTimeToComplete > 0) {
         // Calculate the amount each color needs to change by to smoothly reach the final color in the remaining time
         const colorSteps = FINISH_COLOR.map(
@@ -79,7 +82,7 @@ const Stopwatch = () => {
         );
         setRemainingTimeToComplete((prevTime) => prevTime - 1);
         setCurrentBackgroundColor(newColors);
-        document.body.style.backgroundColor = `rgb(${newColors[0]}, ${newColors[1]}, ${newColors[2]}, 0.4)`;
+        stopwatchDiv.style.backgroundColor = `rgb(${newColors[0]}, ${newColors[1]}, ${newColors[2]}, 0.4)`;
       }
     };
 
@@ -87,7 +90,7 @@ const Stopwatch = () => {
     let colorInterval = null;
     if (isRunning && !isPaused) {
       colorInterval = setInterval(() => {
-        changeBackgroundColor();
+        changeBackgroundColor(stopwatchDiv);
       }, 1000);
       interval = setInterval(() => {
         setStopWatchTime((prevStopWatchTime) => {
@@ -113,7 +116,7 @@ const Stopwatch = () => {
   };
 
   return (
-    <div className="stopwatch">
+    <div className="stopwatch" id="stopwatch">
       <h2>Time since you last stood up:</h2>
       <div className="time">
         {precedingZero(stopWatchTime.hours)}:
