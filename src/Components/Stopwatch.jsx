@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Stopwatch = () => {
-  const START_COLOR = [0, 0, 0];
+  const START_COLOR = [243, 243, 243];
   const TIME_TO_COMPLETE = 3600;
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -67,7 +67,6 @@ const Stopwatch = () => {
 
   useEffect(() => {
     const stopwatchDiv = document.querySelector("#stopwatch");
-    console.log(stopwatchDiv);
     const FINISH_COLOR = [255, 11, 11];
     const changeBackgroundColor = (stopwatchDiv) => {
       if (remainingTimeToComplete > 0) {
