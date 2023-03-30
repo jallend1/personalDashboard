@@ -1,22 +1,15 @@
-import { useState } from "react";
 import "../css/toggle.css";
 
-const Toggle = ({ hour }) => {
-  const [isToggled, setIsToggled] = useState(false);
-
-  const toggle = () => {
-    setIsToggled(!isToggled);
-  };
-
+const Toggle = ({ hour, updateHours }) => {
   return (
     <div className="toggle">
       <label className="toggle">
-        <span className="toggle-label">{hour}</span>
+        <span className="toggle-label">{hour.hour}</span>
         <input
           className="toggle-checkbox"
           type="checkbox"
-          checked={isToggled}
-          onChange={toggle}
+          checked={hour.active}
+          onChange={() => updateHours(hour.hour)}
         />
         <div className="toggle-switch"></div>
       </label>
