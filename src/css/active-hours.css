@@ -1,8 +1,8 @@
 .active-hours {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 80vh;
+  top: 0px;
+  left: 10px;
+  height: 90vh;
 }
 
 .active-hours-container {
