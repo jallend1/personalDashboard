@@ -3,6 +3,9 @@
 .toggle {
   cursor: pointer;
   display: inline-block;
+  min-width: 100px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .toggle-switch {
