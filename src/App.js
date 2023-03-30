@@ -4,10 +4,12 @@ import ActiveHours from "./Components/ActiveHours";
 import { useState } from "react";
 
 function App() {
+  const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
   const [hoursData, setHoursData] = useState(
-    new Array(13).fill(0).map((hour, index) => {
-      return { hour: index + 6, active: false };
-    })
+    hoursDataFromStorage ||
+      new Array(13).fill(0).map((hour, index) => {
+        return { hour: index + 6, active: false };
+      })
   );
 
   const updateHours = (targetHour) => {
@@ -18,7 +20,10 @@ function App() {
       return h;
     });
     setHoursData(newHours);
+    localStorage.setItem("hoursData", JSON.stringify(newHours));
   };
+
+  // Sets hours data to local storage
 
   return (
     <div className="App">
