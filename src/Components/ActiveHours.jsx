@@ -1,6 +1,6 @@
 import "../css/active-hours.css";
 import Toggle from "./Toggle";
-const ActiveHours = ({ updateHours, hoursData }) => {
+const ActiveHours = ({ updateHours, hoursData, resetDay }) => {
   return (
     <div className="active-hours">
       <h2>Active Hours</h2>
@@ -12,6 +12,9 @@ const ActiveHours = ({ updateHours, hoursData }) => {
             updateHours={updateHours}
           />
         ))}
+        <button className="active-hours-reset" onClick={resetDay}>
+          Reset Day
+        </button>
       </div>
     </div>
   );

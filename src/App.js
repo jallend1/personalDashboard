@@ -23,13 +23,23 @@ function App() {
     localStorage.setItem("hoursData", JSON.stringify(newHours));
   };
 
-  // Sets hours data to local storage
+  const resetDay = () => {
+    const newHours = hoursData.map((h) => {
+      return { hour: h.hour, active: false };
+    });
+    setHoursData(newHours);
+    localStorage.setItem("hoursData", JSON.stringify(newHours));
+  };
 
   return (
     <div className="App">
       <Greeting />
       <Stopwatch />
-      <ActiveHours hoursData={hoursData} updateHours={updateHours} />
+      <ActiveHours
+        hoursData={hoursData}
+        updateHours={updateHours}
+        resetDay={resetDay}
+      />
     </div>
   );
 }
