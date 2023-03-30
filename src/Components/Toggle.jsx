@@ -4,7 +4,7 @@ const Toggle = ({ hour: hourDetails, updateHours }) => {
   return (
     <div className="toggle">
       <label className="toggle">
-        <span className="toggle-label">{hourDetails.hour}</span>
+        <span className="toggle-label">{hourDetails.hour}:00</span>
         <input
           className="toggle-checkbox"
           type="checkbox"

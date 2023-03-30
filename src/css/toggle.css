@@ -3,7 +3,7 @@
 .toggle {
   cursor: pointer;
   display: inline-block;
-  min-width: 100px;
+  min-width: 125px;
   display: flex;
   justify-content: space-between;
 }
