@@ -124,7 +124,7 @@ const Stopwatch = () => {
       </div>
       <div className="buttons">
         {toggleStartButton()}
-        <button onClick={resetStopwatch}>Reset</button>
+        <button onClick={resetStopwatch}>I moved!</button>
       </div>
     </div>
   );
