@@ -2,16 +2,18 @@ import Header from "./Components/Header";
 import Stopwatch from "./Components/Stopwatch";
 import Greeting from "./Components/Greeting";
 import ActiveHours from "./Components/ActiveHours";
+import LoginModal from "./Components/LoginModal";
 import { useState } from "react";
 
 function App() {
   const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
   const [hoursData, setHoursData] = useState(
     hoursDataFromStorage ||
-    new Array(13).fill(0).map((hour, index) => {
-      return { hour: index + 6, active: false };
-    })
+      new Array(13).fill(0).map((hour, index) => {
+        return { hour: index + 6, active: false };
+      })
   );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const updateHours = (targetHour) => {
     const newHours = hoursData.map((h) => {
@@ -35,6 +37,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <LoginModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Greeting />
       <Stopwatch />
       <ActiveHours
