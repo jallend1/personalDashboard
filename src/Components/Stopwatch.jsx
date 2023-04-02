@@ -4,7 +4,7 @@ const Stopwatch = () => {
   const START_COLOR = [243, 243, 243];
   const TIME_TO_COMPLETE = 3600;
   const [isRunning, setIsRunning] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
+
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
@@ -17,16 +17,11 @@ const Stopwatch = () => {
 
   const startStopwatch = () => {
     setIsRunning(true);
-    setIsPaused(false);
-  };
-
-  const pauseStopwatch = () => {
-    setIsPaused(true);
   };
 
   const resetStopwatch = () => {
-    setIsRunning(false);
-    setIsPaused(false);
+    setIsRunning(true);
+    // setIsPaused(false);
     setStopWatchTime({
       hours: 0,
       minutes: 0,
@@ -46,13 +41,13 @@ const Stopwatch = () => {
     if (prevStopWatchTime.seconds === 59) {
       return prevStopWatchTime.minutes === 59
         ? // If ??:59:59, add an hour
-          { hours: prevStopWatchTime.hours + 1, minutes: 0, seconds: 0 }
+        { hours: prevStopWatchTime.hours + 1, minutes: 0, seconds: 0 }
         : // If ??:??:59, add a minute
-          {
-            hours: prevStopWatchTime.hours,
-            minutes: prevStopWatchTime.minutes + 1,
-            seconds: 0,
-          };
+        {
+          hours: prevStopWatchTime.hours,
+          minutes: prevStopWatchTime.minutes + 1,
+          seconds: 0,
+        };
     } else {
       // Otherwise, add a second
       return {
@@ -87,7 +82,7 @@ const Stopwatch = () => {
 
     let interval = null;
     let colorInterval = null;
-    if (isRunning && !isPaused) {
+    if (isRunning) {
       colorInterval = setInterval(() => {
         changeBackgroundColor(stopwatchDiv);
       }, 1000);
@@ -96,7 +91,7 @@ const Stopwatch = () => {
           return handleTimeLogic(prevStopWatchTime);
         });
       }, 1000);
-    } else if (!isRunning && !isPaused) {
+    } else if (!isRunning) {
       clearInterval(interval);
       clearInterval(colorInterval);
     }
@@ -104,11 +99,11 @@ const Stopwatch = () => {
       clearInterval(interval);
       clearInterval(colorInterval);
     };
-  }, [isRunning, isPaused, remainingTimeToComplete, currentBackgroundColor]);
+  }, [isRunning, remainingTimeToComplete, currentBackgroundColor]);
 
   const toggleStartButton = () => {
-    if (isRunning && !isPaused) {
-      return <button onClick={pauseStopwatch}>Pause</button>;
+    if (isRunning) {
+      return <button onClick={resetStopwatch}>I moved!</button>;
     } else {
       return <button onClick={startStopwatch}>Start</button>;
     }
@@ -124,7 +119,6 @@ const Stopwatch = () => {
       </div>
       <div className="buttons">
         {toggleStartButton()}
-        <button onClick={resetStopwatch}>I moved!</button>
       </div>
     </div>
   );
