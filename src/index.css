@@ -54,6 +54,10 @@ code {
   text-align: center;
 }
 
+.buttons {
+  text-align: center;
+}
+
 button {
   background: #fff;
   color: #000;
