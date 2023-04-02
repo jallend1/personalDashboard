@@ -6,16 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./images/insignia.jpg");
-  background-color: rgba(0, 0, 0, 0.4);
-  background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
   width: 100vw;
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 code {
@@ -25,7 +20,6 @@ code {
 
 .App {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   height: 100vh;
