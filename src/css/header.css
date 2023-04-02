@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #fff;
+}
+
+header>* {
+    margin: 1rem;
+}
+
+header>button {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: #fff;
+}
