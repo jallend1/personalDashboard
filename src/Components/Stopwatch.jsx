@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import '../css/stopwatch.css'
 
 const Stopwatch = () => {
   const START_COLOR = [243, 243, 243];
@@ -21,7 +22,6 @@ const Stopwatch = () => {
 
   const resetStopwatch = () => {
     setIsRunning(true);
-    // setIsPaused(false);
     setStopWatchTime({
       hours: 0,
       minutes: 0,

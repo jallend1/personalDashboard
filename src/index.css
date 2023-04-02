@@ -39,32 +39,3 @@ code {
   font-size: 4rem;
   text-align: center;
 }
-
-.stopwatch {
-  border: solid 1px #fff;
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem;
-  background-color: rgba(243, 243, 243, 0.4);
-  color: rgb(0, 0, 0);
-}
-
-.time {
-  font-size: 3rem;
-  text-align: center;
-}
-
-.buttons {
-  text-align: center;
-}
-
-button {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  margin: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
