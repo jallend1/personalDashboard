@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const Stopwatch = () => {
   const START_COLOR = [243, 243, 243];
   const TIME_TO_COMPLETE = 3600;
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
