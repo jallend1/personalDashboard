@@ -6,9 +6,15 @@ import LoginModal from "./Components/LoginModal";
 import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 function App() {
-  const app = initializeApp(firebaseConfig);
   const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
   const [hoursData, setHoursData] = useState(
     hoursDataFromStorage ||
@@ -22,6 +28,24 @@ function App() {
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        setIsLoggedIn(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  };
+
+
 
   const updateHours = (targetHour) => {
     const newHours = hoursData.map((h) => {
@@ -44,7 +68,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header toggleModal={toggleModal} isLoggedIn={isLoggedIn} />
+      <Header signInWithGoogle={signInWithGoogle} isLoggedIn={isLoggedIn} />
       <LoginModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} toggleModal={toggleModal} showModal={showModal} />
       <Greeting />
       <Stopwatch />
