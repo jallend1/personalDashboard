@@ -4,8 +4,11 @@ import Greeting from "./Components/Greeting";
 import ActiveHours from "./Components/ActiveHours";
 import LoginModal from "./Components/LoginModal";
 import { useState } from "react";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "./firebaseConfig";
 
 function App() {
+  const app = initializeApp(firebaseConfig);
   const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
   const [hoursData, setHoursData] = useState(
     hoursDataFromStorage ||
