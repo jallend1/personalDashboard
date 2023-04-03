@@ -1,4 +1,4 @@
-const Greeting = () => {
+const Greeting = ({ userFirstName }) => {
   const date = new Date();
   const hours = date.getHours();
   let timeOfDay;
@@ -13,7 +13,7 @@ const Greeting = () => {
 
   return (
     <div className="greeting">
-      <h1>Good {timeOfDay}, Jason.</h1>
+      <h1>Good {timeOfDay}, {userFirstName}.</h1>
     </div>
   );
 };
