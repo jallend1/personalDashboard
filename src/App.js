@@ -9,11 +9,16 @@ function App() {
   const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
   const [hoursData, setHoursData] = useState(
     hoursDataFromStorage ||
-      new Array(13).fill(0).map((hour, index) => {
-        return { hour: index + 6, active: false };
-      })
+    new Array(13).fill(0).map((hour, index) => {
+      return { hour: index + 6, active: false };
+    })
   );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const updateHours = (targetHour) => {
     const newHours = hoursData.map((h) => {
@@ -36,8 +41,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <LoginModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Header toggleModal={toggleModal} isLoggedIn={isLoggedIn} />
+      <LoginModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} toggleModal={toggleModal} showModal={showModal} />
       <Greeting />
       <Stopwatch />
       <ActiveHours

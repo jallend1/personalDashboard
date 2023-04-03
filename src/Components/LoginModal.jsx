@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const LoginModal = () => {
+const LoginModal = ({ toggleModal, showModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = (e) => {
@@ -13,14 +13,13 @@ const LoginModal = () => {
       setError("Please enter all fields");
     } else {
       setError("");
-      setShowModal(false);
+      toggleModal();
     }
   };
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Login</button>
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={toggleModal}>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>

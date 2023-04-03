@@ -1,11 +1,11 @@
 import '../css/header.css';
 
-const Header = () => {
+const Header = ({ isLoggedIn, toggleModal }) => {
     return (
         <header>
             {/* <img src="" alt="" /> */}
             <p>My Dashboard</p>
-            <button>Login</button>
+            <button onClick={toggleModal}>{isLoggedIn ? 'Logout' : 'Login'}</button>
         </header>
     );
 }
