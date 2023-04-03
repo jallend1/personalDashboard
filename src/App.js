@@ -45,6 +45,12 @@ function App() {
       });
   };
 
+  const signOut = () => {
+    auth.signOut().then(() => {
+      setIsLoggedIn(false);
+    });
+  };
+
 
 
   const updateHours = (targetHour) => {
@@ -68,7 +74,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header signInWithGoogle={signInWithGoogle} isLoggedIn={isLoggedIn} />
+      <Header signInWithGoogle={signInWithGoogle} signOut={signOut} isLoggedIn={isLoggedIn} />
       <LoginModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} toggleModal={toggleModal} showModal={showModal} />
       <Greeting />
       <Stopwatch />

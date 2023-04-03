@@ -1,11 +1,15 @@
 import '../css/header.css';
 
-const Header = ({ isLoggedIn, signInWithGoogle }) => {
+const Header = ({ isLoggedIn, signInWithGoogle, signOut }) => {
     return (
         <header>
             {/* <img src="" alt="" /> */}
             <p>My Dashboard</p>
-            <button onClick={signInWithGoogle}>{isLoggedIn ? 'Logout' : 'Login'}</button>
+            {isLoggedIn ? (
+                <button onClick={signOut}>Logout</button>
+            ) : (
+                <button onClick={signInWithGoogle}>Login</button>
+            )}
         </header>
     );
 }
