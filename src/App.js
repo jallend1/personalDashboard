@@ -2,7 +2,7 @@ import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+// import { getFirestore } from "firebase/firestore";
 
 
 import Header from "./Components/Header";
