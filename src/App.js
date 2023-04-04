@@ -9,6 +9,7 @@ import Header from "./Components/Header";
 import Stopwatch from "./Components/Stopwatch";
 import Greeting from "./Components/Greeting";
 import ActiveHours from "./Components/ActiveHours";
+import Water from "./Components/Water";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -74,7 +75,10 @@ function App() {
     <div className="App">
       <Header signInWithGoogle={signInWithGoogle} signOut={signOut} isLoggedIn={isLoggedIn} />
       <Greeting userFirstName={userFirstName} />
-      <Stopwatch />
+      <div className="components">
+        <Stopwatch />
+        <Water />
+      </div>
       <ActiveHours
         hoursData={hoursData}
         updateHours={updateHours}
