@@ -14,7 +14,7 @@ import Water from "./Components/Water";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-const db = getFirestore(app);
+// const db = getFirestore(app);
 
 function App() {
   const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
@@ -30,17 +30,17 @@ function App() {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
         const user = result.user;
         setUserFirstName(user.displayName.split(" ")[0]);
         setIsLoggedIn(true);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // const email = error.email;
+        // const credential = GoogleAuthProvider.credentialFromError(error);
       });
   };
 
