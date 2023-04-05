@@ -85,7 +85,7 @@ const Stopwatch = () => {
       clearInterval(interval);
       clearInterval(colorInterval);
     };
-  }, [isRunning, remainingTimeToComplete, currentBackgroundColor]);
+  }, [isRunning, remainingTimeToComplete, currentBackgroundColor, startTime]);
 
   return (
     <div className="stopwatch component" id="stopwatch">
