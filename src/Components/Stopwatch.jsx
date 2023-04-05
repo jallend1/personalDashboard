@@ -39,6 +39,13 @@ const Stopwatch = () => {
 
   const precedingZero = (time) => (time < 10 ? "0" + time : time);
 
+  const convertSecondsToTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return { hours, minutes, secs };
+  };
+
   useEffect(() => {
     const stopwatchDiv = document.querySelector("#stopwatch");
     const changeBackgroundColor = (stopwatchDiv) => {
@@ -58,12 +65,6 @@ const Stopwatch = () => {
       }
     };
 
-    const convertSecondsToTime = (seconds) => {
-      const hours = Math.floor(seconds / 3600);
-      const minutes = Math.floor((seconds % 3600) / 60);
-      const secs = Math.floor(seconds % 60);
-      return { hours, minutes, secs };
-    };
 
     let interval = null;
     let colorInterval = null;
