@@ -3,6 +3,7 @@
   top: 40px;
   left: 10px;
   height: 80vh;
+  max-height: 650px;
 }
 
 .active-hours-container {

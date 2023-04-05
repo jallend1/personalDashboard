@@ -1,16 +1,38 @@
 import React, { useState, useEffect } from "react";
 import '../css/stopwatch.css'
 
+const START_COLOR = [243, 243, 243];
+const FINISH_COLOR = [255, 11, 11];
+const TIME_TO_COMPLETE = 3600;
+const initialTime = Date.now();
+
 const Stopwatch = () => {
-  const START_COLOR = [243, 243, 243];
-  const TIME_TO_COMPLETE = 3600;
   const [isRunning, setIsRunning] = useState(true);
+  const [startTime, setStartTime] = useState(initialTime);
+  const [currentTime, setCurrentTime] = useState(null);
+  
+
+  const convertSecondsToTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return {hours, minutes, secs};
+  };
+
+  const calculateTimePassed = (start, current) => {
+    const timePassed = currentTime - startTime;
+    const seconds = Math.floor(timePassed / 1000);
+    return seconds;
+  }
+  
+
 
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
     seconds: 0,
   });
+
   const [currentBackgroundColor, setCurrentBackgroundColor] =
     useState(START_COLOR);
   const [remainingTimeToComplete, setRemainingTimeToComplete] =
@@ -58,11 +80,29 @@ const Stopwatch = () => {
     }
   };
 
+  // Function to log the amount of time that has passed each second
+  const logTime = () => {
+    const timePassed = currentTime - startTime;
+    const seconds = Math.floor(timePassed / 1000);
+    console.log(seconds);
+  };
+
+  // On page load, call the logTime function every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(Date.now());
+      logTime();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [logTime]);
+
+
+
+
   const precedingZero = (time) => (time < 10 ? "0" + time : time);
 
   useEffect(() => {
     const stopwatchDiv = document.querySelector("#stopwatch");
-    const FINISH_COLOR = [255, 11, 11];
     const changeBackgroundColor = (stopwatchDiv) => {
       if (remainingTimeToComplete > 0) {
         // Calculate the amount each color needs to change by to smoothly reach the final color in the remaining time
