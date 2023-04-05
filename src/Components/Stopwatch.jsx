@@ -4,29 +4,11 @@ import '../css/stopwatch.css'
 const START_COLOR = [243, 243, 243];
 const FINISH_COLOR = [255, 11, 11];
 const TIME_TO_COMPLETE = 3600;
-const initialTime = Date.now();
 
 const Stopwatch = () => {
   const [isRunning, setIsRunning] = useState(true);
-  const [startTime, setStartTime] = useState(initialTime);
+  const [startTime, setStartTime] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
-
-
-  const convertSecondsToTime = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return { hours, minutes, secs };
-  };
-
-  const calculateTimePassed = (start, current) => {
-    const timePassed = currentTime - startTime;
-    const seconds = Math.floor(timePassed / 1000);
-    return seconds;
-  }
-
-
-
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
@@ -50,13 +32,13 @@ const Stopwatch = () => {
       seconds: 0,
     });
     resetBackgroundColor();
+    setRemainingTimeToComplete(TIME_TO_COMPLETE);
   };
 
   const resetBackgroundColor = () => {
     const stopwatchDiv = document.querySelector("#stopwatch");
     setCurrentBackgroundColor(START_COLOR);
     stopwatchDiv.style.backgroundColor = `rgb(${START_COLOR[0]}, ${START_COLOR[1]}, ${START_COLOR[2]}, 0.4)`;
-    setRemainingTimeToComplete(TIME_TO_COMPLETE);
   };
 
   const handleTimeLogic = (prevStopWatchTime) => {
@@ -79,18 +61,6 @@ const Stopwatch = () => {
       };
     }
   };
-
-  // On page load, call the logTime function every second
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(Date.now());
-
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-
-
 
   const precedingZero = (time) => (time < 10 ? "0" + time : time);
 

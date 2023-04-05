@@ -10,7 +10,6 @@ const Stopwatch2 = () => {
   });
 
   const convertSecondsToTime = (seconds) => {
-    console.log(seconds / 1000);
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
