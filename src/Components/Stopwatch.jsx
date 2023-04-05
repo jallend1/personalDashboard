@@ -7,12 +7,11 @@ const TIME_TO_COMPLETE = 3600;
 
 const Stopwatch = () => {
   const [isRunning, setIsRunning] = useState(true);
-  const [startTime, setStartTime] = useState(null);
-  const [currentTime, setCurrentTime] = useState(null);
+  const [startTime, setStartTime] = useState(Date.now());
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
-    seconds: 0,
+    secs: 0,
   });
 
   const [currentBackgroundColor, setCurrentBackgroundColor] =
@@ -20,16 +19,13 @@ const Stopwatch = () => {
   const [remainingTimeToComplete, setRemainingTimeToComplete] =
     useState(TIME_TO_COMPLETE);
 
-  const startStopwatch = () => {
-    setIsRunning(true);
-  };
-
   const resetStopwatch = () => {
+    setStartTime(Date.now());
     setIsRunning(true);
     setStopWatchTime({
       hours: 0,
       minutes: 0,
-      seconds: 0,
+      secs: 0,
     });
     resetBackgroundColor();
     setRemainingTimeToComplete(TIME_TO_COMPLETE);
@@ -39,27 +35,6 @@ const Stopwatch = () => {
     const stopwatchDiv = document.querySelector("#stopwatch");
     setCurrentBackgroundColor(START_COLOR);
     stopwatchDiv.style.backgroundColor = `rgb(${START_COLOR[0]}, ${START_COLOR[1]}, ${START_COLOR[2]}, 0.4)`;
-  };
-
-  const handleTimeLogic = (prevStopWatchTime) => {
-    if (prevStopWatchTime.seconds === 59) {
-      return prevStopWatchTime.minutes === 59
-        ? // If ??:59:59, add an hour
-        { hours: prevStopWatchTime.hours + 1, minutes: 0, seconds: 0 }
-        : // If ??:??:59, add a minute
-        {
-          hours: prevStopWatchTime.hours,
-          minutes: prevStopWatchTime.minutes + 1,
-          seconds: 0,
-        };
-    } else {
-      // Otherwise, add a second
-      return {
-        hours: prevStopWatchTime.hours,
-        minutes: prevStopWatchTime.minutes,
-        seconds: prevStopWatchTime.seconds + 1,
-      };
-    }
   };
 
   const precedingZero = (time) => (time < 10 ? "0" + time : time);
@@ -83,6 +58,13 @@ const Stopwatch = () => {
       }
     };
 
+    const convertSecondsToTime = (seconds) => {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = Math.floor(seconds % 60);
+      return { hours, minutes, secs };
+    };
+
     let interval = null;
     let colorInterval = null;
     if (isRunning) {
@@ -90,9 +72,10 @@ const Stopwatch = () => {
         changeBackgroundColor(stopwatchDiv);
       }, 1000);
       interval = setInterval(() => {
-        setStopWatchTime((prevStopWatchTime) => {
-          return handleTimeLogic(prevStopWatchTime);
-        });
+        const currentTime = Date.now();
+        const secondsPassed = (currentTime - startTime) / 1000;
+        const { hours, minutes, secs } = convertSecondsToTime(secondsPassed);
+        setStopWatchTime({ hours, minutes, secs });
       }, 1000);
     } else if (!isRunning) {
       clearInterval(interval);
@@ -104,24 +87,16 @@ const Stopwatch = () => {
     };
   }, [isRunning, remainingTimeToComplete, currentBackgroundColor]);
 
-  const toggleStartButton = () => {
-    if (isRunning) {
-      return <button onClick={resetStopwatch}>I moved!</button>;
-    } else {
-      return <button onClick={startStopwatch}>Start</button>;
-    }
-  };
-
   return (
     <div className="stopwatch component" id="stopwatch">
       <h2>Time since you last stood up:</h2>
       <div className="time">
         {precedingZero(stopWatchTime.hours)}:
         {precedingZero(stopWatchTime.minutes)}:
-        {precedingZero(stopWatchTime.seconds)}
+        {precedingZero(stopWatchTime.secs)}
       </div>
       <div className="buttons">
-        {toggleStartButton()}
+        <button onClick={resetStopwatch}>I moved!</button>
       </div>
     </div>
   );
