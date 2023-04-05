@@ -16,8 +16,8 @@ const Water = () => {
             <h2>Water Consumed</h2>
             <h3 className="waterAmount">{water} ml</h3>
             <div className="waterIncrements">
-                <button onClick={incrementWater}>+</button>
                 <button onClick={decrementWater}>-</button>
+                <button onClick={incrementWater}>+</button>
             </div>
         </div>
     );
