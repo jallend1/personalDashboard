@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const Stopwatch2 = () => {
-  const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [startTime, setStartTime] = useState(null);
-  const [currentTime, setCurrentTime] = useState(null);
   const [stopWatchTime, setStopWatchTime] = useState({
     hours: 0,
     minutes: 0,
@@ -12,29 +10,25 @@ const Stopwatch2 = () => {
   });
 
   const convertSecondsToTime = (seconds) => {
+    console.log(seconds / 1000);
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return {hours, minutes, secs};
+    const secs = Math.floor(seconds % 60);
+    return { hours, minutes, secs };
   };
-
-  const calculateTimePassed = (start, current) => {
-    const timePassed = currentTime - startTime;
-    const seconds = Math.floor(timePassed / 1000);
-    return seconds;
-  }
 
   useEffect(() => {
     let interval;
     if (isRunning) {
       interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
+        const currentTime = Date.now();
+        const secondsPassed = (currentTime - startTime) / 1000;
+        const { hours, minutes, secs } = convertSecondsToTime(secondsPassed);
+        setStopWatchTime({ hours, minutes, secs });
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [isRunning]);
-
-
+  }, [isRunning, startTime]);
 
   const handleStart = () => {
     setStartTime(Date.now());
@@ -46,13 +40,12 @@ const Stopwatch2 = () => {
   };
 
   const handleReset = () => {
-    setTime(0);
     setIsRunning(false);
   };
 
   return (
     <div>
-      <h1>{time }</h1>
+      <h1>{stopWatchTime.hours}:{stopWatchTime.minutes}:{stopWatchTime.secs}</h1>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
       <button onClick={handleReset}>Reset</button>

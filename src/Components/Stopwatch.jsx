@@ -10,13 +10,13 @@ const Stopwatch = () => {
   const [isRunning, setIsRunning] = useState(true);
   const [startTime, setStartTime] = useState(initialTime);
   const [currentTime, setCurrentTime] = useState(null);
-  
+
 
   const convertSecondsToTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return {hours, minutes, secs};
+    return { hours, minutes, secs };
   };
 
   const calculateTimePassed = (start, current) => {
@@ -24,7 +24,7 @@ const Stopwatch = () => {
     const seconds = Math.floor(timePassed / 1000);
     return seconds;
   }
-  
+
 
 
   const [stopWatchTime, setStopWatchTime] = useState({
@@ -80,21 +80,14 @@ const Stopwatch = () => {
     }
   };
 
-  // Function to log the amount of time that has passed each second
-  const logTime = () => {
-    const timePassed = currentTime - startTime;
-    const seconds = Math.floor(timePassed / 1000);
-    console.log(seconds);
-  };
-
   // On page load, call the logTime function every second
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
-      logTime();
+
     }, 1000);
     return () => clearInterval(interval);
-  }, [logTime]);
+  }, []);
 
 
 
