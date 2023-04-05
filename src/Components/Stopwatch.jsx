@@ -65,7 +65,6 @@ const Stopwatch = () => {
       }
     };
 
-
     let interval = null;
     let colorInterval = null;
     if (isRunning) {
