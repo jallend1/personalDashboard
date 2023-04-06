@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import WaterImage from '../images/water.png';
+import Plus from '../images/plus.svg';
+import Minus from '../images/minus.svg';
 
 const Water = () => {
     const [water, setWater] = useState(0);
@@ -19,8 +21,12 @@ const Water = () => {
             </div>
             <h3 className="waterAmount">{water} ml</h3>
             <div className="waterIncrements">
-                <button onClick={decrementWater}>-</button>
-                <button onClick={incrementWater}>+</button>
+                <div className="waterDecrement" onClick={decrementWater}>
+                    <img src={Minus} alt="Subtract water" />
+                </div>
+                <div className="waterIncrement" onClick={incrementWater}>
+                    <img src={Plus} alt="Add water" />
+                </div>
             </div>
         </div>
     );
