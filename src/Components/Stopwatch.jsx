@@ -99,7 +99,7 @@ const Stopwatch = () => {
         {precedingZero(stopWatchTime.secs)}
       </div>
       <div className="buttons">
-        <button onClick={resetStopwatch}>I moved!</button>
+        <button className="stopwatch-button" onClick={resetStopwatch}>I moved!</button>
       </div>
     </div>
   );

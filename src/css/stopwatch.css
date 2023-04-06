@@ -7,12 +7,21 @@
     text-align: center;
 }
 
-button {
+.stopwatch-button {
     background: #fff;
-    border: none;
     padding: 1rem 2rem;
     font-size: 1.5rem;
-    margin: 1rem;
     border-radius: 5px;
     cursor: pointer;
+    margin: 1rem auto;
+    background-color: black;
+    border: 3px solid #56c080;
+    border-radius: 50px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: #fff;
+}
+
+.stopwatch-button:hover {
+    box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #56c080;
 }
