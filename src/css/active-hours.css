@@ -1,17 +1,21 @@
 .active-hours {
-  position: absolute;
+  /* position: absolute;
   top: 40px;
   left: 10px;
-  height: 80vh;
+  height: 80vh; */
   max-height: 650px;
+  grid-area: sidebar;
+  text-align: center;
 }
 
 .active-hours-container {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: space-around;
+}
+
+.active-hours-container>div {
+  margin: auto;
 }
 
 .active-hours-reset {

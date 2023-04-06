@@ -74,16 +74,22 @@ function App() {
   return (
     <div className="App">
       <Header signInWithGoogle={signInWithGoogle} signOut={signOut} isLoggedIn={isLoggedIn} />
-      <Greeting userFirstName={userFirstName} />
-      <div className="components">
-        <Stopwatch />
-        <Water />
+      <div className="page-content">
+        <div className="sidebar">
+          <ActiveHours
+            hoursData={hoursData}
+            updateHours={updateHours}
+            resetDay={resetDay}
+          />
+        </div>
+        <div className="main-content">
+          <Greeting userFirstName={userFirstName} />
+          <div className="components">
+            <Stopwatch />
+            <Water />
+          </div>
+        </div>
       </div>
-      <ActiveHours
-        hoursData={hoursData}
-        updateHours={updateHours}
-        resetDay={resetDay}
-      />
     </div>
   );
 }

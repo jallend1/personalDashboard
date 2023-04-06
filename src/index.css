@@ -26,6 +26,14 @@ code {
   width: 100vw;
 }
 
+.page-content {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas: "sidebar" "main";
+  height: 100%;
+  width: 100%;
+}
+
 .greeting {
   background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
