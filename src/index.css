@@ -45,8 +45,8 @@ code {
 }
 
 .components {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
 }
 
 .component {
@@ -60,6 +60,7 @@ code {
   background-color: rgba(243, 243, 243, 0.4);
   color: rgb(0, 0, 0);
   text-align: center;
+  width: 400px;
 }
 
 .waterAmount {
