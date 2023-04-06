@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/stopwatch.css'
 
-const START_COLOR = [243, 243, 243];
+const START_COLOR = [0, 0, 0];
 const FINISH_COLOR = [255, 11, 11];
 const TIME_TO_COMPLETE = 3600;
 
