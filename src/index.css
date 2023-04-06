@@ -64,6 +64,20 @@ code {
   width: 400px;
 }
 
+.component-image {
+
+  display: flex;
+  justify-content: center;
+}
+
+.component-image>img {
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 1rem;
+  margin: 1rem;
+
+}
+
 .waterAmount {
   font-size: 3rem;
   margin: 0;

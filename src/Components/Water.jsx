@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import WaterImage from '../images/water.png';
 
 const Water = () => {
     const [water, setWater] = useState(0);
@@ -13,7 +14,9 @@ const Water = () => {
 
     return (
         <div className="water component">
-            <h2>Water Consumed</h2>
+            <div className="component-image">
+                <img src={WaterImage} alt="water" />
+            </div>
             <h3 className="waterAmount">{water} ml</h3>
             <div className="waterIncrements">
                 <button onClick={decrementWater}>-</button>

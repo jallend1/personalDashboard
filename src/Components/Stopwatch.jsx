@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Shoes from "../images/shoes.png";
 import '../css/stopwatch.css'
 
 const START_COLOR = [0, 0, 0];
@@ -89,7 +90,9 @@ const Stopwatch = () => {
 
   return (
     <div className="stopwatch component" id="stopwatch">
-      <h2>Time since you last stood up:</h2>
+      <div className="component-image">
+        <img src={Shoes} alt="shoes" />
+      </div>
       <div className="time">
         {precedingZero(stopWatchTime.hours)}:
         {precedingZero(stopWatchTime.minutes)}:
