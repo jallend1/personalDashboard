@@ -12,7 +12,7 @@ const ActiveHours = ({ updateHours, hoursData, resetDay }) => {
             updateHours={updateHours}
           />
         ))}
-        <button className="active-hours-reset" onClick={resetDay}>
+        <button className="neon-button reset-button" onClick={resetDay}>
           Reset Day
         </button>
       </div>
