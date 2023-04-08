@@ -1,4 +1,5 @@
 import '../css/header.css';
+import Button from './Button';
 
 const Header = ({ isLoggedIn, signInWithGoogle, signOut }) => {
     return (
@@ -6,9 +7,9 @@ const Header = ({ isLoggedIn, signInWithGoogle, signOut }) => {
             {/* <img src="" alt="" /> */}
             <p>My Dashboard</p>
             {isLoggedIn ? (
-                <button className="neon-button" onClick={signOut}>Logout</button>
+                <Button text="Logout" onClick={signOut} className="neon-button" />
             ) : (
-                <button className="neon-button" onClick={signInWithGoogle}>Login</button>
+                <Button text="Login" onClick={signInWithGoogle} className="neon-button" />
             )}
         </header>
     );
