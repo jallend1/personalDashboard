@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../css/water.css';
 import WaterImage from '../images/water.png';
 import Plus from '../images/plus.svg';
 import Minus from '../images/minus.svg';
