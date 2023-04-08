@@ -1,3 +1,5 @@
+import '../css/greeting.css';
+
 const Greeting = ({ userFirstName }) => {
   const date = new Date();
   const hours = date.getHours();

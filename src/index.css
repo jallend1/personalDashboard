@@ -34,16 +34,6 @@ code {
   width: 100%;
 }
 
-.greeting {
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-}
-
-.greeting h1 {
-  font-size: 4rem;
-  text-align: center;
-}
-
 .components {
   display: flex;
   justify-content: center;
