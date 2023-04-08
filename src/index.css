@@ -105,20 +105,3 @@ code {
   height: 25px;
   background-color: #fff;
 }
-
-.neon-button {
-  font-size: 0.75rem;
-  padding: 0.25rem;
-  margin-top: 1rem;
-  width: 100px;
-  background-color: transparent;
-  border: 3px solid #56c080;
-  border-radius: 10px;
-  -webkit-transition: all .15s ease-in-out;
-  transition: all .15s ease-in-out;
-  color: #fff;
-}
-
-.neon-button:hover {
-  box-shadow: 0 0 10px 0 #00d7c3 inset, 0 0 20px 2px #56c080;
-}
