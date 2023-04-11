@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Edit from '../images/edit.png';
 import Task from './Task';
 
 
@@ -31,6 +32,10 @@ const PrimaryTasks = () => {
 
     return (
         <div className="task-list component">
+            <header className="task-list-header">
+                <h2>Primary Tasks</h2>
+                <img src={Edit} alt="edit" />
+            </header>
             {tasks.map((task) => (
                 <Task key={task.id} task={task} onTaskClick={toggleTask} />
             ))}
