@@ -10,6 +10,7 @@ import Stopwatch from "./Components/Stopwatch";
 import Greeting from "./Components/Greeting";
 import ActiveHours from "./Components/ActiveHours";
 import Water from "./Components/Water";
+import PrimaryTasks from "./Components/PrimaryTasks";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -87,6 +88,7 @@ function App() {
           <div className="components">
             <Stopwatch />
             <Water />
+            <PrimaryTasks />
           </div>
         </div>
       </div>
