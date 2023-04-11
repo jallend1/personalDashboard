@@ -5,7 +5,7 @@ const Task = ({ task = { title: 'Sample task', completed: false }, onTaskClick }
             style={{ backgroundColor: task.completed ? "green" : "red" }}
             onClick={() => onTaskClick(task.id)}
         >
-            <input type="checkbox" checked={task.completed} />
+            <input type="checkbox" checked={task.completed} onChange={() => onTaskClick(task.id)} />
             {task.title}
         </div>
     );
