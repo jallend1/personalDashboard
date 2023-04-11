@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import Task from './Task';
 
-const tasks = [
+
+const taskList = [
     {
         id: 1,
         title: '10,000 steps',
@@ -13,16 +15,24 @@ const tasks = [
     },
     {
         id: 3,
-        title: 'Clean gecko tank',
+        title: 'Clean litter box',
         completed: false
     }
 ]
 
 const PrimaryTasks = () => {
+    const [tasks, setTasks] = useState(taskList);
+
+    const toggleTask = (id) => {
+        setTasks(
+            tasks.map((task) => task.id === id ? { ...task, completed: !task.completed } : task)
+        );
+    }
+
     return (
         <div className="task-list component">
             {tasks.map((task) => (
-                <Task key={task.id} task={task} />
+                <Task key={task.id} task={task} onTaskClick={toggleTask} />
             ))}
         </div>
     )
