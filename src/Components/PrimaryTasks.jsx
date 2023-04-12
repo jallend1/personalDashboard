@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Edit from '../images/edit.png';
+import ClipboardCheck from '../images/clipboard_check.svg';
 import Task from './Task';
 
 
@@ -39,33 +39,38 @@ const PrimaryTasks = () => {
     }
 
     return (
-        <div className="task-list component">
-            <header className="task-list-header" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} >
-                <h2>The Big Three</h2>
-                {isHovering && <img src={Edit} alt="edit" onClick={() => setEditMode(!editMode)} />}
-            </header>
-            {
-                editMode && (
-                    <div className="edit-mode">
-                        {tasks.map((task) => (
-                            <div key={task.id} className="edit-task">
-                                <input type="text" value={task.title} onChange={(e) => editTask(task.id, e.target.value)} />
-                            </div>
-                        ))}
-                        <button onClick={() => setEditMode(false)}>Exit</button>
-                    </div>
-                )
-            }
-            {
-                !editMode && (
-                    <div className="task-list-body">
-                        {tasks.map((task) => (
-                            <Task key={task.id} task={task} onTaskClick={toggleTask} />
-                        ))}
-                    </div>
-                )
-            }
+        <div className="task-list component" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+            <div className="component-image">
+                <img src={ClipboardCheck} alt="clipboard" />
+            </div>
+            <main>
 
+                {
+                    !editMode && (
+                        <div className="task-list-body">
+                            {tasks.map((task) => (
+                                <Task key={task.id} task={task} onTaskClick={toggleTask} />
+                            ))}
+                        </div>
+                    )
+                }
+                {
+                    editMode && (
+                        <div className="edit-mode">
+                            {tasks.map((task) => (
+                                <div key={task.id} className="edit-task">
+                                    <input type="text" value={task.title} onChange={(e) => editTask(task.id, e.target.value)} />
+                                </div>
+                            ))}
+                            <button onClick={() => setEditMode(false)}>Exit</button>
+                        </div>
+                    )
+                }
+            </main>
+            <footer>
+                {/* If hovering over component, but not in edit mode, show the edit button */}
+                {isHovering && !editMode ? <button onClick={() => setEditMode(!editMode)}>Modify List</button> : null}
+            </footer>
         </div >
     )
 }
