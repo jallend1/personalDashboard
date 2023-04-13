@@ -2,7 +2,7 @@ import { useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-// import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 
 import Header from "./Components/Header";
@@ -15,7 +15,7 @@ import PrimaryTasks from "./Components/PrimaryTasks";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-// const db = getFirestore(app);
+const db = getFirestore(app);
 
 function App() {
   const hoursDataFromStorage = JSON.parse(localStorage.getItem("hoursData"));
@@ -27,6 +27,34 @@ function App() {
   );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userFirstName, setUserFirstName] = useState("Friend");
+  const [uid, setUid] = useState("");
+
+  // Creates an object containing today's date, and active hours to send to Firestore
+  const createDayObject = () => {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const date = `${month}/${day}/${year}`;
+    return { date, activeHours: hoursData };
+  };
+
+  const updateDayInFirestore = () => {
+    const day = createDayObject();
+    const docRef = db.collection("users").doc(uid).collection("days").doc(day.date);
+    docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          docRef.update(day);
+        } else {
+          docRef.set(day);
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  };
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -35,7 +63,9 @@ function App() {
         // const token = credential.accessToken;
         const user = result.user;
         setUserFirstName(user.displayName.split(" ")[0]);
+        setUid(user.uid);
         setIsLoggedIn(true);
+        checkForUserInFirestore(user.uid);
       })
       .catch((error) => {
         // const errorCode = error.code;
@@ -45,13 +75,28 @@ function App() {
       });
   };
 
+  const checkForUserInFirestore = (userID) => {
+    const docRef = db.collection("users").doc(uid);
+    docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          // Check if user has a document for today
+          updateDayInFirestore();
+        } else {
+          docRef.set({ name: userFirstName });
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  };
+
   const signOut = () => {
     auth.signOut().then(() => {
       setIsLoggedIn(false);
     });
   };
-
-
 
   const updateHours = (targetHour) => {
     const newHours = hoursData.map((h) => {
